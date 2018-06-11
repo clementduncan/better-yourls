@@ -51,7 +51,7 @@ services:
       - default
       - ouroboros_default
     labels:
-      - 'traefik.frontend.rule=better-yourls.test'
+      - 'traefik.frontend.rule=Host:better-yourls.test'
       - 'traefik.domain=better-yourls.test'
       - 'traefik.enable=true'
       - 'traefik.docker.network=ouroboros_default'
