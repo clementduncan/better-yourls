@@ -25,7 +25,6 @@ services:
     image: ufhweb/php:7.2-wordpress
     depends_on:
       - mariadb
-      - memcached
     volumes:
       - "./Docker/wordpress:/var/www/html"
       - "./:/var/www/html/wp-content/plugins/better-yourls"
