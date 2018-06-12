@@ -64,7 +64,7 @@ class Better_YOURLS_Actions {
 	 *
 	 * @return bool True if valid post or false
 	 */
-	protected function _check_valid_post( $post_id ) {
+	protected function check_valid_post( $post_id ) {
 
 		$post_type = get_post_type( $post_id );
 
@@ -134,11 +134,11 @@ class Better_YOURLS_Actions {
 	 *
 	 * @return void
 	 */
-	protected function _generate_post_on_save( $post_id ) {
+	protected function generate_post_on_save( $post_id ) {
 
 		// Make sure we are originating from the right place.
 		if (
-			true === $this->_check_valid_post( $post_id ) &&
+			true === $this->check_valid_post( $post_id ) &&
 			(
 				! isset( $_POST['better_yourls_nonce'] ) || // WPCS: input var ok.
 				! wp_verify_nonce( $_POST['better_yourls_nonce'], 'better_yourls_save_post' ) // WPCS: input var ok. Sanitization ok.
@@ -291,11 +291,11 @@ class Better_YOURLS_Actions {
 	 */
 	public function action_save_post( $post_id ) {
 
-		if ( false === $this->_check_valid_post( $post_id ) ) {
+		if ( false === $this->check_valid_post( $post_id ) ) {
 			return;
 		}
 
-		$this->_generate_post_on_save( $post_id );
+		$this->generate_post_on_save( $post_id );
 
 	}
 
@@ -312,11 +312,11 @@ class Better_YOURLS_Actions {
 	 */
 	public function action_transition_post_status( $new_status, $old_status, $post ) {
 
-		if ( false === $this->_check_valid_post( $post->ID ) || 'publish' !== $new_status ) {
+		if ( false === $this->check_valid_post( $post->ID ) || 'publish' !== $new_status ) {
 			return;
 		}
 
-		$this->_generate_post_on_save( $post->ID );
+		$this->generate_post_on_save( $post->ID );
 
 	}
 
@@ -463,7 +463,7 @@ class Better_YOURLS_Actions {
 	 */
 	public function filter_get_shortlink( $short_link, $id ) {
 
-		if ( false === $this->_check_valid_post( $id ) ) {
+		if ( false === $this->check_valid_post( $id ) ) {
 			return $short_link;
 		}
 
@@ -491,7 +491,7 @@ class Better_YOURLS_Actions {
 	 */
 	public function filter_pre_get_shortlink( $short_link, $id ) {
 
-		if ( false === $this->_check_valid_post( $id ) ) {
+		if ( false === $this->check_valid_post( $id ) ) {
 			return $short_link;
 		}
 
@@ -522,7 +522,7 @@ class Better_YOURLS_Actions {
 	 */
 	public function filter_sharing_permalink( $link, $post_id ) {
 
-		if ( false === $this->_check_valid_post( $post_id ) ) {
+		if ( false === $this->check_valid_post( $post_id ) ) {
 			return $link;
 		}
 
