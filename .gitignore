@@ -203,3 +203,6 @@ assets/js/*.map
 
 # Docker Stuff
 Docker
+
+# Unit tests
+!/tests/bin/
